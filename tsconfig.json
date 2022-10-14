@@ -4,9 +4,9 @@
   ],
   "compilerOptions":{
     "outDir": "./lib",
-    "target": "es5",
-    "module": "commonjs",
-    "lib": ["es6", "esnext", "dom"],
+    "target": "ESNext",
+    "module": "ESNext",
+    "lib": ["esnext"],
     "types": ["jest"],
     "declaration": true,
     "removeComments": true,
