@@ -6,7 +6,7 @@
     "outDir": "./lib",
     "target": "ESNext",
     "module": "ESNext",
-    "lib": ["esnext"],
+    "lib": ["esnext", "dom"],
     "types": ["jest"],
     "declaration": true,
     "removeComments": true,
