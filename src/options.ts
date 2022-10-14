@@ -1,6 +1,5 @@
 import { Operation } from '@apollo/client/core';
 import { Breadcrumb } from '@sentry/browser';
-import deepMerge from 'deepmerge';
 
 import { GraphQLBreadcrumb } from './breadcrumb';
 
@@ -58,13 +57,6 @@ export interface FullOptions {
 
 export type AttachBreadcrumbsOptions = {
   /**
-   * Include the full query string?
-   *
-   * Defaults to false.
-   */
-  includeQuery: false | true;
-
-  /**
    * Include the variable values?
    *
    * Be careful not to leak sensitive information or send too much data.
@@ -74,15 +66,6 @@ export type AttachBreadcrumbsOptions = {
   includeVariables: false | true;
 
   /**
-   * Include the fetched result (data, errors, extensions)?
-   *
-   * Be careful not to leak sensitive information or send too much data.
-   *
-   * Defaults to false.
-   */
-  includeFetchResult: false | true;
-
-  /**
    * Include the response error?
    *
    * Be careful not to leak sensitive information or send too much data.
@@ -90,26 +73,6 @@ export type AttachBreadcrumbsOptions = {
    * Defaults to false.
    */
   includeError: false | true;
-
-  /**
-   * Include the contents of the Apollo Client cache?
-   *
-   * This is mostly useful for debugging purposes and not recommended for production environments,
-   * see "Be careful what you include", unless carefully combined with `beforeBreadcrumb`.
-   *
-   * Defaults to false.
-   */
-  includeCache: false | true;
-
-  /**
-   * Include arbitrary data from the `ApolloContext`?
-   *
-   * Accepts a list of keys in dot notation, e.g. `foo.bar`. Can be useful to include extra
-   * information such as headers.
-   *
-   * Defaults to false.
-   */
-  includeContext: false | NonEmptyArray<string>;
 
   /**
    * Modify the breadcrumb right before it is sent.
@@ -131,18 +94,22 @@ export const defaultOptions = {
   setFingerprint: true,
 
   attachBreadcrumbs: {
-    includeQuery: false,
     includeVariables: false,
-    includeFetchResult: false,
     includeError: false,
-    includeCache: false,
-    includeContext: false,
     transform: undefined,
   },
 } as const;
 
 export function withDefaults(options: SentryLinkOptions): FullOptions {
-  return deepMerge(defaultOptions, options);
+  // return deepMerge(defaultOptions, options)
+  return {
+    ...defaultOptions,
+    ...options,
+    attachBreadcrumbs: {
+      ...defaultOptions.attachBreadcrumbs,
+      ...options.attachBreadcrumbs,
+    }
+  };
 }
 
 export type SentryLinkOptions = Partial<

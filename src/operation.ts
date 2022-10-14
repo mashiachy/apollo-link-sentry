@@ -1,5 +1,5 @@
 import { Operation } from '@apollo/client/core';
-import { OperationDefinitionNode } from 'graphql';
+import type { OperationDefinitionNode } from 'graphql';
 
 export function extractDefinition(
   operation: Operation,

@@ -4,7 +4,7 @@ import {
   FetchResult,
   NextLink,
   Operation,
-  ServerError,
+  type ServerError,
 } from '@apollo/client/core';
 import type { SeverityLevel } from '@sentry/types';
 import Observable from 'zen-observable';
@@ -60,11 +60,6 @@ export class SentryLink extends ApolloLink {
             // We must have a breadcrumb if attachBreadcrumbs was set
             (breadcrumb as GraphQLBreadcrumb).level = severityForResult(result);
 
-            if (attachBreadcrumbs.includeFetchResult) {
-              // We must have a breadcrumb if attachBreadcrumbs was set
-              (breadcrumb as GraphQLBreadcrumb).data.fetchResult = result;
-            }
-
             if (
               attachBreadcrumbs.includeError &&
               result.errors &&
@@ -101,10 +96,6 @@ export class SentryLink extends ApolloLink {
               const { result, response, ...rest } = error;
               scrubbedError = rest;
 
-              if (attachBreadcrumbs.includeFetchResult) {
-                // We must have a breadcrumb if attachBreadcrumbs was set
-                (breadcrumb as GraphQLBreadcrumb).data.fetchResult = result;
-              }
             } else {
               scrubbedError = error;
             }
