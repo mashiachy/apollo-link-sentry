@@ -6,7 +6,7 @@ import {
   Operation,
   type ServerError,
 } from '@apollo/client/core';
-import type { SeverityLevel } from '@sentry/types';
+import type { SeverityLevel, Span } from '@sentry/types';
 import Observable from 'zen-observable';
 
 import { GraphQLBreadcrumb, makeBreadcrumb } from './breadcrumb';
@@ -14,7 +14,7 @@ import { FullOptions, SentryLinkOptions, withDefaults } from './options';
 import {
   attachBreadcrumbToSentry,
   setFingerprint,
-  setTransaction,
+  setSpan,
 } from './sentry';
 
 export class SentryLink extends ApolloLink {
@@ -35,8 +35,9 @@ export class SentryLink extends ApolloLink {
       return forward(operation);
     }
 
-    if (options.setTransaction) {
-      setTransaction(operation);
+    let span: Span | undefined
+    if (options.setSpan) {
+      span = setSpan(operation);
     }
 
     if (options.setFingerprint) {
@@ -83,6 +84,9 @@ export class SentryLink extends ApolloLink {
               options,
             );
           }
+          if (options.setSpan) {
+            span?.finish?.()
+          }
 
           originalObserver.complete();
         },
@@ -111,6 +115,10 @@ export class SentryLink extends ApolloLink {
               breadcrumb as GraphQLBreadcrumb,
               options,
             );
+          }
+
+          if (options.setSpan) {
+            span?.finish?.()
           }
 
           originalObserver.error(error);

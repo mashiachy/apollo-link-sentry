@@ -2,6 +2,7 @@ import { Operation } from '@apollo/client/core';
 import {
   addBreadcrumb,
   configureScope,
+  getCurrentHub,
   Breadcrumb,
   Scope,
 } from '@sentry/browser';
@@ -19,6 +20,26 @@ export function setTransaction(operation: Operation): void {
     configureScope((scope: Scope) => {
       scope.setTransactionName(name.value);
     });
+  }
+}
+
+export function setSpan(operation: Operation) {
+  const definition = extractDefinition(operation);
+  const name = definition.name;
+
+  if (name) {
+    const hub = getCurrentHub()
+    const scope = hub.getScope()
+    if (!scope) {
+      return undefined
+    }
+    const transaction = scope.getTransaction()
+    if (transaction) {
+      return transaction.startChild({
+        op: 'apollo request: ' + name.value
+      })
+    }
+    return undefined
   }
 }
 

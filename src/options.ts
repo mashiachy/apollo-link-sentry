@@ -23,13 +23,13 @@ export interface FullOptions {
   uri: undefined | string;
 
   /**
-   * Set the Sentry transaction name to the GraphQL operation name.
+   * Set the Sentry span name to the GraphQL operation name.
    *
    * May be overwritten by other parts of your app.
    *
    * Defaults to true.
    */
-  setTransaction: true | false;
+  setSpan: true | false;
 
   /**
    * Narrow Sentry's fingerprint by appending the GraphQL operation name to the {{default}} key.
@@ -90,7 +90,7 @@ export type AttachBreadcrumbsOptions = {
 export const defaultOptions = {
   shouldHandleOperation: undefined,
   uri: undefined,
-  setTransaction: true,
+  setSpan: true,
   setFingerprint: true,
 
   attachBreadcrumbs: {
@@ -115,7 +115,7 @@ export function withDefaults(options: SentryLinkOptions): FullOptions {
 export type SentryLinkOptions = Partial<
   Pick<
     FullOptions,
-    'shouldHandleOperation' | 'uri' | 'setTransaction' | 'setFingerprint'
+    'shouldHandleOperation' | 'uri' | 'setSpan' | 'setFingerprint'
   >
 > & {
   attachBreadcrumbs?: Partial<AttachBreadcrumbsOptions> | false;
