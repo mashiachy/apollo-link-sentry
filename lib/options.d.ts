@@ -5,7 +5,7 @@ export declare type NonEmptyArray<T> = [T, ...Array<T>];
 export interface FullOptions {
     shouldHandleOperation: undefined | ((operation: Operation) => boolean);
     uri: undefined | string;
-    setTransaction: true | false;
+    setSpan: true | false;
     setFingerprint: true | false;
     attachBreadcrumbs: AttachBreadcrumbsOptions | false;
 }
@@ -17,7 +17,7 @@ export declare type AttachBreadcrumbsOptions = {
 export declare const defaultOptions: {
     readonly shouldHandleOperation: undefined;
     readonly uri: undefined;
-    readonly setTransaction: true;
+    readonly setSpan: true;
     readonly setFingerprint: true;
     readonly attachBreadcrumbs: {
         readonly includeVariables: false;
@@ -26,6 +26,6 @@ export declare const defaultOptions: {
     };
 };
 export declare function withDefaults(options: SentryLinkOptions): FullOptions;
-export declare type SentryLinkOptions = Partial<Pick<FullOptions, 'shouldHandleOperation' | 'uri' | 'setTransaction' | 'setFingerprint'>> & {
+export declare type SentryLinkOptions = Partial<Pick<FullOptions, 'shouldHandleOperation' | 'uri' | 'setSpan' | 'setFingerprint'>> & {
     attachBreadcrumbs?: Partial<AttachBreadcrumbsOptions> | false;
 };
