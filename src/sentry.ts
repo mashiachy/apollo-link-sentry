@@ -36,7 +36,8 @@ export function setSpan(operation: Operation) {
     const transaction = scope.getTransaction()
     if (transaction) {
       return transaction.startChild({
-        op: 'apollo request: ' + name.value
+        op: 'apollo.request',
+        description: "Apollo request: " + name.value
       })
     }
     return undefined
