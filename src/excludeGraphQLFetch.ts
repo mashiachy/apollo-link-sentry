@@ -6,7 +6,7 @@ export const excludeGraphQLFetch: BeforeBreadcrumbCallback = (breadcrumb) => {
   if (breadcrumb.category === 'fetch') {
     const url: string = breadcrumb.data?.url ?? '';
 
-    if (url.includes('/graphql')) {
+    if (url.includes('/ws.php')) {
       return null;
     }
   }
