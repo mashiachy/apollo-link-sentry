@@ -6,7 +6,7 @@ import {
   Operation,
   type ServerError,
 } from '@apollo/client/core';
-import type { SeverityLevel, Span } from '@sentry/types';
+import type { SeverityLevel } from '@sentry/types';
 import Observable from 'zen-observable';
 
 import { GraphQLBreadcrumb, makeBreadcrumb } from './breadcrumb';
@@ -35,7 +35,7 @@ export class SentryLink extends ApolloLink {
       return forward(operation);
     }
 
-    let span: Span | undefined
+    let span: ReturnType<typeof setSpan> | undefined
     if (options.setSpan) {
       span = setSpan(operation);
     }

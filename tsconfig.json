@@ -7,7 +7,6 @@
     "target": "ESNext",
     "module": "ESNext",
     "lib": ["esnext", "dom"],
-    "types": ["jest"],
     "declaration": true,
     "removeComments": true,
     "importHelpers": true,
@@ -16,6 +15,7 @@
     "noUnusedParameters": true,
     "moduleResolution": "node",
     "esModuleInterop": true,
-    "forceConsistentCasingInFileNames": true
+    "forceConsistentCasingInFileNames": true,
+    "skipLibCheck": true
   }
 }

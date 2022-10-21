@@ -1,33 +1,11 @@
 {
-  "name": "apollo-link-sentry",
-  "version": "3.2.0",
-  "license": "MIT",
-  "author": "Diederik van den Burger <diederikvandenburger@tab.capital>",
-  "repository": "https://github.com/DiederikvandenB/apollo-link-sentry.git",
-  "homepage": "https://github.com/DiederikvandenB/apollo-link-sentry",
-  "main": "./lib/index.js",
-  "typings": "./lib/index.d.ts",
+  "name": "@mashiachy/apollo-link-sentry",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
   "type": "module",
-  "files": [
-    "lib/**/*"
-  ],
-  "keywords": [
-    "apollo",
-    "graphql",
-    "sentry",
-    "error reporting"
-  ],
   "scripts": {
-    "watch": "tsc-watch -p ./tsconfig.json",
-    "prebuild": "rimraf ./lib",
-    "build": "tsc",
-    "test": "jest",
-    "test:coverage": "jest --coverage --watchAll=false",
-    "lint": "eslint .",
-    "lint:fix": "eslint --fix .",
-    "prettify": "prettier --write README.md UPGRADE.md LICENSE.md",
-    "fix": "yarn run lint:fix && yarn run prettify",
-    "validate": "yarn run lint && yarn run test && yarn run build"
+    "ts-types": "tsc --emitDeclarationOnly --outDir lib",
+    "build": "rimraf lib && node ./esbuild.js && npm run ts-types"
   },
   "peerDependencies": {
     "@apollo/client": "^3.2.3",
@@ -37,31 +15,12 @@
   },
   "devDependencies": {
     "@apollo/client": "^3.5.6",
-    "@semantic-release/changelog": "^6.0.1",
-    "@semantic-release/git": "^10.0.1",
-    "@sentry/browser": "^7.0.0",
-    "@types/jest": "^27.0.3",
+    "@sentry/browser": "^7.16.0",
     "@types/zen-observable": "^0.8.3",
-    "@typescript-eslint/eslint-plugin": "^5.7.0",
-    "@typescript-eslint/parser": "^5.7.0",
-    "eslint": "^8.4.1",
-    "eslint-config-prettier": "^8.3.0",
-    "eslint-plugin-import": "^2.25.3",
-    "eslint-plugin-prettier": "^4.0.0",
+    "esbuild": "^0.15.12",
     "graphql": "^15.8.0",
-    "isomorphic-fetch": "^3.0.0",
-    "jest": "^27.4.5",
-    "jest-spec-reporter": "^1.0.17",
-    "prettier": "^2.5.1",
     "rimraf": "^3.0.2",
-    "semantic-release": "^19.0.3",
-    "sentry-testkit": "^4.0.1",
-    "ts-jest": "^27.1.1",
-    "tsc-watch": "^4.5.0",
     "tslib": "^2.0.3",
-    "typescript": "^4.5.4"
-  },
-  "volta": {
-    "node": "14.19.0"
+    "typescript": "^4.8.4"
   }
 }
