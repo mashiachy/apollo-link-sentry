@@ -1,5 +1,5 @@
 import esbuild from 'esbuild';
-import pkg from "./package.json"  assert { type: 'json' };
+import pkg from "./package.json" assert { type: 'json' };
 
 esbuild
   .build({
@@ -7,9 +7,11 @@ esbuild
     outdir: 'lib',
     bundle: true,
     minify: true,
-    splitting: true,
-    format: 'esm',
-    target: ['esnext'],
+    format: 'cjs',
+    target: 'esnext',
     external: Object.keys(pkg.peerDependencies),
   })
-  .catch(() => process.exit(1));
+  .catch((error) => {
+    console.error(error)
+    process.exit(1)
+  });

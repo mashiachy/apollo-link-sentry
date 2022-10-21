@@ -2,7 +2,7 @@
   "name": "@mashiachy/apollo-link-sentry",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
-  "type": "module",
+  "type": "commonjs",
   "scripts": {
     "ts-types": "tsc --emitDeclarationOnly --outDir lib",
     "build": "rimraf lib && node ./esbuild.js && npm run ts-types"
