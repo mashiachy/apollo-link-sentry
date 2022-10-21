@@ -7,6 +7,7 @@
   "homepage": "https://github.com/DiederikvandenB/apollo-link-sentry",
   "main": "./lib/index.js",
   "typings": "./lib/index.d.ts",
+  "type": "module",
   "files": [
     "lib/**/*"
   ],
