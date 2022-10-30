@@ -5,7 +5,7 @@
   "type": "commonjs",
   "scripts": {
     "ts-types": "tsc --emitDeclarationOnly --outDir lib",
-    "build": "rimraf lib && node ./esbuild.js && npm run ts-types"
+    "build": "rimraf lib && node ./esbuild.mjs && npm run ts-types"
   },
   "peerDependencies": {
     "@apollo/client": "^3.2.3",
