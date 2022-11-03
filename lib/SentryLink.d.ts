@@ -1,4 +1,5 @@
-import { ApolloLink, FetchResult, NextLink, Operation } from '@apollo/client/core';
+import { ApolloLink, type NextLink } from "@apollo/client/link/core";
+import type { FetchResult, Operation } from '@apollo/client/core';
 import Observable from 'zen-observable';
 import { SentryLinkOptions } from './options';
 export declare class SentryLink extends ApolloLink {

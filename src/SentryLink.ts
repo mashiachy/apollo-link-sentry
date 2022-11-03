@@ -1,11 +1,6 @@
-import {
-  ApolloError,
-  ApolloLink,
-  FetchResult,
-  NextLink,
-  Operation,
-  type ServerError,
-} from '@apollo/client/core';
+import { ApolloError } from '@apollo/client/errors';
+import { ApolloLink, type NextLink } from "@apollo/client/link/core"
+import type { FetchResult, Operation, ServerError } from '@apollo/client/core';
 import type { SeverityLevel } from '@sentry/types';
 import Observable from 'zen-observable';
 

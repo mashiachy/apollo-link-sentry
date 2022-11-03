@@ -3,7 +3,7 @@
   "main": "lib/index.cjs",
   "module": "lib/index.js",
   "types": "lib/index.d.ts",
-  "type": "commonjs",
+  "type": "module",
   "scripts": {
     "ts-types": "tsc --emitDeclarationOnly --outDir lib",
     "build": "rimraf lib && node ./esbuild.mjs && npm run ts-types"
