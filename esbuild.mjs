@@ -1,17 +1,28 @@
 import esbuild from 'esbuild';
 import pkg from "./package.json" assert { type: 'json' };
 
-esbuild
-  .build({
-    entryPoints: ['src/index.ts'],
-    outdir: 'lib',
-    bundle: true,
-    minify: true,
-    format: 'cjs',
-    target: 'esnext',
-    external: Object.keys(pkg.peerDependencies),
-  })
-  .catch((error) => {
-    console.error(error)
-    process.exit(1)
-  });
+esbuild.buildSync({
+  entryPoints: ['src/index.ts'],
+  outdir: 'lib',
+  bundle: true,
+  minify: true,
+  treeShaking: true,
+  format: 'cjs',
+  target: ['node18'],
+  external: Object.keys(pkg.peerDependencies),
+  outExtension: {
+    ".js": ".cjs"
+  }
+});
+
+esbuild.buildSync({
+  entryPoints: ['src/index.ts'],
+  outdir: 'lib',
+  bundle: true,
+  minify: true,
+  splitting: true,
+  treeShaking: true,
+  format: 'esm',
+  target: ['esnext'],
+  external: Object.keys(pkg.peerDependencies),
+});
